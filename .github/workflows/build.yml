@@ -24,9 +24,9 @@ jobs:
       with:
         gradle-version: '8.2'
 
-    # Yahan humne ./gradlew ki jagah direct gradle use kiya hai
+    # Ye line missing thi, humne system gradle use kiya hai
     - name: Build Debug APK
-      run: gradle assembleDebug
+      run: gradle assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
