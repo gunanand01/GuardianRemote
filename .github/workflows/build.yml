@@ -20,13 +20,15 @@ jobs:
         distribution: 'temurin'
 
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
+      uses: gradle/actions/setup-gradle@v6
       with:
         gradle-version: '8.2'
 
-    # Ye line missing thi, humne system gradle use kiya hai
+    - name: Accept Android SDK Licenses
+      run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
+
     - name: Build Debug APK
-      run: gradle assembleDebug --stacktrace
+      run: gradle :app:assembleDebug --no-daemon --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
